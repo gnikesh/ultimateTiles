@@ -146,7 +146,27 @@
 
 			if (that.checkCollision(car) == 1){
 				that.GAME_FLAG = 0;
-				alert("GAME OVER!!! YOUR SCORE: " + Math.floor(this.score));
+				car.position = 0;
+				car.x = 105;
+				this.stopGame();
+				var popUpBox = document.getElementById('pop-up-box');
+				var scoreDisplay = document.getElementById('score-data');
+				document.getElementById('score').style.display = 'none';
+				scoreDisplay.innerHTML = Math.floor(this.score);
+				popUpBox.style.display = "block";
+
+
+				// // var choice = confirm("GAME OVER!!! \nYOUR SCORE: " + Math.floor(this.score) + "\nPress Cancel to EXIT, Press OK to restart");
+				// if (choice == true){
+				// 	for (var i = 0; i < 3; i++){
+				// 		that.oppCars[i].y = -200;
+				// 		that.score = 0;
+				// 		car.x = 105;
+				// 		car.redraw();
+				// 	}
+				// } else{
+				// 	window.close();
+				// }
 			}
 			// for (var i = 0; i < 3; i++){
 			// 	carI = that.oppCars[i];
@@ -160,16 +180,40 @@
 			document.addEventListener("keypress", myKeyPress, false);
 			this.score += 0.01;
 
-			document.getElementById('score').innerHTML = 'Your Score: ' + Math.floor(this.score);
-			if (Math.floor(this.score) > 2){
-				this.SPEED -= 1;
-			}
+			document.getElementsByTagName('h3')[0].innerHTML = 'SCORE: ' + Math.floor(this.score);
+			// if (Math.floor(this.score) > 2){
+			// 	this.stopGame();
+			// 	this.SPEED -= 1;
+			// 	this.startGame();
+			// }
 		}
-		setInterval(this.moveCar, this.SPEED);
-		// setTimeout(this.moveCar, 50);
+
+		this.restartGame = function(){
+			for (var i = 0; i < 3; i++){
+				that.oppCars[i].y=-200;
+				that.oppCars[i].redraw();
+			}
+
+			this.score = 0;
+			this.SPEED = 15;
+			car.x = 105;
+			car.redraw();
+			document.getElementById('pop-up-box').style.display = 'none';
+			document.getElementById('score').style.display = "block";
+			document.getElementsByTagName('h3')[0].innerHTML = 'SCORE: ' + Math.floor(this.score);
+
+			this.startGame();			
+		}
+
+		this.startGame = function (){
+			this.moveCarLoop = setInterval(this.moveCar, this.SPEED);
+		}
 		
+		this.stopGame = function(){
+			clearInterval(this.moveCarLoop);
+		}
+
+		this.startGame();		
 	}
-	
 	carAnimation();
-	
 })();

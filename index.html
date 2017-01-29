@@ -4,6 +4,46 @@
 	<title>Ultimate Tiles</title>
 	<link href="css/reset.css" rel="stylesheet" type="text/css" media="screen">
 	<style>
+
+		#pop-up-box{
+			display: none;
+			position: fixed;
+			z-index: 1;
+			padding-top: 100px;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			/*background-color: rgb(0,0,0);*/
+			/*background-color: rgb(0,0,0,0.4);*/
+		}
+
+		#pop-up-text{
+			background-color: #fefefe;
+			margin: auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+		}
+
+		#ok-button{
+			color: #aaaaaa;
+			text-decoration: none;
+			border: none;
+			float: right;
+			font-size: 24px;
+			width: 100px;
+			height: 50px;
+			margin-top: 8px;
+		}
+
+		#ok-button:hover, #ok-button:focus{
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
 		div.car {
 			width: 90px;
 			height: 100px;
@@ -12,6 +52,7 @@
 			/*border-radius: 50px 50px 50px 50px;*/
 			
 		}
+
 		#border {
 			width: 300px;
 			height: 400px;
@@ -33,7 +74,14 @@
 <body>
 <div id="main Wrapper clrfix">
 	<div id="border"> </div>
-	<div id="score"><h2>Your Score: </h2></div>
+	<div id="score"><h3></h3></div>
+	<div id="pop-up-box">
+		<div id="pop-up-text">
+			<button id="ok-button" onclick="restartGame()">OK</button>
+			<h3><p>Game Over! Your Score: <span id="score-data">00</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;Press OK to restart the game!</p></h3>
+		</div>
+	</div>
 </div>
 </body>
 <script type="text/javascript" src="js/carrun.js"></script>
